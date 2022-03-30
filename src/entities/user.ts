@@ -12,17 +12,17 @@ export class User extends BaseEntity {
 
     @OneToMany(
         () => Post,
-        post=> post.users
+        post=> post.author
     )
-        post:Post
+    posts: Post[]
         
     @Column()
     lastName: string
 
     @OneToMany(
         () => Comment,
-        post=> post.users
+        post=> post.author
     )
-        comment:Comment
+        comments:Comment[]
 }
 

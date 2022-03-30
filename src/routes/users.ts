@@ -7,6 +7,14 @@ const router = express.Router();
 
 
 router.get('/', async (req, res) => {
+    const users = await User.find({
+        relations: {
+          comments: true,
+          posts: true,
+          },
+          
+      });
+      return res.json(users);
     
 })
 
@@ -28,4 +36,4 @@ router.post('/', async (req, res) => {
     })
 
 
-    export { router as createUsers }
+    export { router as usersRouter }

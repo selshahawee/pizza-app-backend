@@ -9,19 +9,19 @@ import {
 } from "typeorm";
 import {Post} from "./post"
   
-@Entity("tags")
-export class Tags extends BaseEntity {
+@Entity("tag")
+export class Tag extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
   
   @Column()
   title: string
 
-    @ManyToMany(() => Post)
+    @ManyToMany(() => Post, post => post.tags)
     @JoinTable({
         name: "postTag",
         joinColumn: {
-            name: "tags",
+            name: "tag",
             referencedColumnName: 'id'
         },
         inverseJoinColumn: {
@@ -30,6 +30,6 @@ export class Tags extends BaseEntity {
         }
     })
   
-  post: Post;
+  posts: Post[];
 
 }

@@ -6,6 +6,7 @@ import {
     JoinColumn,
     ManyToOne,
 } from "typeorm";
+import { Post } from "./post";
 import {User} from "./user"
   
 @Entity("comment")
@@ -16,10 +17,12 @@ export class Comment extends BaseEntity {
   @Column()
   body: string
 
-  @ManyToOne(() => User, (users) => users.comment)
-  @JoinColumn({
-    name: "user_id",
-  })
-  users: User;
+  @ManyToOne(() => User, (author) => author.comments ,{nullable:false})
+  
+  author: User;
 
+
+  @ManyToOne(() => Post, (post) => post.comments ,{nullable:false})
+  
+  post:Post;
 }

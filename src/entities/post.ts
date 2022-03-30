@@ -4,12 +4,15 @@ import {
   Column,
   BaseEntity,
   JoinColumn,
-    ManyToOne,
+  ManyToOne,
   ManyToMany,
+  CreateDateColumn,
+    UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { User } from "./user";
-import { Tags } from "./tags";
-
+import { Tag } from "./tag";
+import { Comment } from "./comment";
 
 @Entity("post")
 export class Post extends BaseEntity {
@@ -21,19 +24,26 @@ export class Post extends BaseEntity {
 
   @Column()
   body: string;
-    @Column()
-      
-  tag: string;
 
-  @Column({ type: "timestamp" })
-  date: Date;
+  @CreateDateColumn({ type: "timestamp" })
+  date_created: Date;
+  @UpdateDateColumn({ type: "timestamp" })
+  date_updated: Date;
 
-  @ManyToOne(() => User, (users) => users.post)
+  @ManyToOne(() => User, (author) => author.posts, { nullable: false })
   @JoinColumn({
-    name: "user_id",
+    name: "author_id",
   })
-  users: User;
+  author: User;
+
+  @ManyToMany(() => Tag , tag => tag.posts,{cascade: true})
+  tags: Tag[]
     
-    @ManyToMany(() => Tags)
-    tags:Tags
+  @OneToMany(
+    () => Comment,
+    comment=> comment.post
+)
+    comments:Comment[]
 }
+
+
