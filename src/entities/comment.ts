@@ -3,7 +3,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     BaseEntity,
-    JoinColumn,
+    
     ManyToOne,
 } from "typeorm";
 import { Post } from "./post";
