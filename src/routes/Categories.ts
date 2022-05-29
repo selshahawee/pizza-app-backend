@@ -1,13 +1,18 @@
 import express from "express";
 
-import { Product } from "../entities/Products";
+
 import { Category} from "../entities/Categories";
-import { Order } from "../entities/Orders";
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const categories = await Category.find();
-    return res.json(categories);
-    
+    try {
+        const categories = await Category.find();
+        return res.json(categories);
+    }
+    catch (err) {
+        console.log(err)
+      res.status(400).json({ msg: 'something went wrong', details: err })
+    }
 })
     export { router as categoryRouter };

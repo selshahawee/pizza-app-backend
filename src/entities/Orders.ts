@@ -20,8 +20,8 @@ export class Order  extends BaseEntity {
   name: string
 
 
-  @Column({nullable: false})
- mobile: number 
+  @Column({nullable: true})
+ mobile: string 
 
   @Column()
 address: string
@@ -29,7 +29,7 @@ address: string
   @Column()
   city: string
   
-  @Column({ default: false })
+  @Column({ default: false , nullable: true})
   completed: boolean
   
   @CreateDateColumn({ type: "timestamp" })

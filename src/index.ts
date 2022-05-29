@@ -6,8 +6,8 @@ import morgan from 'morgan';
 import { productRouter } from './routes/Products';
 import { categoryRouter } from './routes/Categories';
 import AppDataSource from './data-source'
-import { authRouter } from './routes/auth';
-import { userRouter } from './routes/User';
+
+
 import { orderRouter } from './routes/Orders';
 dotenv.config()
 
@@ -26,8 +26,8 @@ app.get('/', function (req:Request,res:Response) {
 app.use('/products', productRouter)
 app.use('/order', orderRouter)
 app.use('/categories', categoryRouter)
-app.use('/user', userRouter)
-app.use('/auth', authRouter)
+
+
 
 
 app.listen(process.env.PORT, async () => {
